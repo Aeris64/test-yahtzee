@@ -37,7 +37,7 @@ test('Yahtzee first test', () => {
         "Four of kind": 0,
         "Full House": 0,
         "Large straight": 0,
-        "Small straight": 0,
+        "Small straight": 30,
         "Three of kind": 0,
         "YAHTZEE": 0,
         "sum": {
@@ -127,5 +127,31 @@ test('Yahtzee chance', () => {
         "Large straight": 0,
         "Chance": 14,
         "YAHTZEE": 0
+    });
+});
+
+test('Yahtzee small straight', () => {
+    const data = [2, 3, 4, 4, 5];
+    const object = new Yahtzee(data);
+
+    object.Process();
+
+    expect(object.res).toStrictEqual({
+        "Chance": 18,
+        "Four of kind": 0,
+        "Full House": 0,
+        "Large straight": 0,
+        "Small straight": 30,
+        "Three of kind": 0,
+        "YAHTZEE": 0,
+        "sum": {
+            "1": 0,
+            "2": 2,
+            "3": 3,
+            "4": 8,
+            "5": 5,
+            "6": 0,
+            "total": 18
+        }
     });
 });

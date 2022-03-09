@@ -30,8 +30,8 @@ exports.yahtzee = class Yahtzee {
         this.GetThreeKind();
         this.GetFourKind();
 
+        this.GetSmallStraight();
 
-        
         this.GetChance();
     }
 
@@ -43,34 +43,49 @@ exports.yahtzee = class Yahtzee {
     }
 
     GetThreeKind() {
-        let tempArray = {};
+        let tmpObj = {};
         for(let i = 0; i < this.dices.length; i++) {
-            if(tempArray[this.dices[i]]){
-                tempArray[this.dices[i]]++;
+            if(tmpObj[this.dices[i]]){
+                tmpObj[this.dices[i]]++;
             }
             else{
-                tempArray[this.dices[i]] = 1;
+                tmpObj[this.dices[i]] = 1;
             }
         }
-        for(const [key, result] of Object.entries(tempArray)){
+
+        for(const [key, result] of Object.entries(tmpObj)){
             if(result >= 3)
             this.res["Three of kind"] = this.res.sum.total;
         }
     }
 
     GetFourKind() {
-        let tempArray = {};
+        let tmpObj = {};
         for(let i = 0; i < this.dices.length; i++) {
-            if(tempArray[this.dices[i]]){
-                tempArray[this.dices[i]]++;
+            if(tmpObj[this.dices[i]]){
+                tmpObj[this.dices[i]]++;
             }
             else{
-                tempArray[this.dices[i]] = 1;
+                tmpObj[this.dices[i]] = 1;
             }
         }
-        for(const [key, result] of Object.entries(tempArray)){
+
+        for(const [key, result] of Object.entries(tmpObj)){
             if(result >= 4)
             this.res["Four of kind"] = this.res.sum.total;
+        }
+    }
+
+    GetSmallStraight() {
+        let begin = 0;
+
+        for(let i = 1; i < 6; i++) {
+            if(this.res.sum[i] > 1) {
+                begin++;
+                if(begin == 4) this.res["Small straight"] = 30;
+                // if(begin == 4) this.res["Large straight"] = 40;
+            }
+            else begin = 0;
         }
     }
 
