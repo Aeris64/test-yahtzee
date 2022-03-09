@@ -27,6 +27,8 @@ exports.yahtzee = class Yahtzee {
         if(this.dices == null || this.dices.length != 5) return;
 
         this.GetSum();
+        this.GetThreeKind();
+        this.GetFourKind();
     }
 
     GetSum() {
@@ -35,6 +37,38 @@ exports.yahtzee = class Yahtzee {
             this.res.sum[this.dices[i]] += this.dices[i];
         }
     }
+
+    GetThreeKind() {
+        let tempArray = {};
+        for(let i = 0; i < this.dices.length; i++) {
+            if(tempArray[this.dices[i]]){
+                tempArray[this.dices[i]]++;
+            }    
+            else{
+                tempArray[this.dices[i]] = 1;
+            }
+        }
+        for(const [key, result] of Object.entries(tempArray)){
+            if(result >= 3)
+            this.res["Three of kind"] = this.res.sum.total;
+        }
+    }
+
+    GetFourKind() {
+        let tempArray = {};
+        for(let i = 0; i < this.dices.length; i++) {
+            if(tempArray[this.dices[i]]){
+                tempArray[this.dices[i]]++;
+            }    
+            else{
+                tempArray[this.dices[i]] = 1;
+            }
+        }
+        for(const [key, result] of Object.entries(tempArray)){
+            if(result >= 4)
+            this.res["Four of kind"] = this.res.sum.total;
+        }
+    }    
 }
 
 exports.run = function run(...lst) {

@@ -51,3 +51,55 @@ test('Yahtzee first test', () => {
         }
     });
 });
+
+test('Yahtzee three of a kind', () => {
+    const data = [3,3,3,1,5];
+    const object = new Yahtzee(data);
+
+    object.Process();
+
+    expect(object.res).toStrictEqual({
+        sum: {
+            1: 1,
+            2: 0,
+            3: 9,
+            4: 0,
+            5: 5,
+            6: 0,
+            total: 15
+        },
+        "Three of kind": 15,
+        "Four of kind": 0,
+        "Full House": 0,
+        "Small straight": 0,
+        "Large straight": 0,
+        "Chance": 0,
+        "YAHTZEE": 0
+    });
+});
+
+test('Yahtzee four of a kind', () => {
+    const data = [5,5,5,2,5];
+    const object = new Yahtzee(data);
+
+    object.Process();
+
+    expect(object.res).toStrictEqual({
+        sum: {
+            1: 0,
+            2: 2,
+            3: 0,
+            4: 0,
+            5: 20,
+            6: 0,
+            total: 22
+        },
+        "Three of kind": 22,
+        "Four of kind": 22,
+        "Full House": 0,
+        "Small straight": 0,
+        "Large straight": 0,
+        "Chance": 0,
+        "YAHTZEE": 0
+    });
+});
