@@ -207,3 +207,29 @@ test('Yahtzee YAHTZEE', () => {
         }
     });
 });
+
+test('Yahtzee full house', () => {
+    const data = [5,5,5,2,2];
+    const object = new Yahtzee(data);
+
+    object.Process();
+
+    expect(object.res).toStrictEqual({
+        sum: {
+            1: 0,
+            2: 4,
+            3: 0,
+            4: 0,
+            5: 15,
+            6: 0,
+            total: 19
+        },
+        "Three of kind": 19,
+        "Four of kind": 0,
+        "Full House": 25,
+        "Small straight": 0,
+        "Large straight": 0,
+        "Chance": 19,
+        "YAHTZEE": 0
+    });
+});

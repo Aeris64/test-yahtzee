@@ -29,7 +29,7 @@ exports.yahtzee = class Yahtzee {
         this.GetSum();
         this.GetThreeKind();
         this.GetFourKind();
-
+        this.GetFullHouse();
         this.GetSmallStraight();
         this.GetLargeStraight();
         this.GetChance();
@@ -98,6 +98,32 @@ exports.yahtzee = class Yahtzee {
                 if(begin == 5) this.res["Large straight"] = 40;
             }
             else begin = 0;
+        }
+    }
+
+    GetFullHouse() {
+        let tempObject = {};
+        let threeInARow = false;
+        let twoInARow = false;
+
+        for(let i = 0; i < this.dices.length; i++) {
+            if(tempObject[this.dices[i]]){
+                tempObject[this.dices[i]]++;
+            }    
+            else{
+                tempObject[this.dices[i]] = 1;
+            }
+        }
+        for(const [key, result] of Object.entries(tempObject)){
+            if(result == 3){
+                threeInARow = true;
+            }
+            if(result == 2){
+                twoInARow = true;
+            }
+        }
+        if(threeInARow && twoInARow){
+            this.res["Full House"] = 25;
         }
     }
 
