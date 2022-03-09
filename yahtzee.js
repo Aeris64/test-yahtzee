@@ -44,23 +44,15 @@ exports.yahtzee = class Yahtzee {
     }
 
     GetThreeKind() {
-        let tmpObj = {};
-        for(let i = 0; i < this.dices.length; i++) {
-            if(tmpObj[this.dices[i]]){
-                tmpObj[this.dices[i]]++;
-            }
-            else{
-                tmpObj[this.dices[i]] = 1;
-            }
-        }
-
-        for(const [key, result] of Object.entries(tmpObj)){
-            if(result >= 3)
-            this.res["Three of kind"] = this.res.sum.total;
-        }
+        this.res["Three of kind"] = (this.GetSameKind(3) ? this.res.sum.total : 0);
     }
 
     GetFourKind() {
+        this.res["Four of kind"] = (this.GetSameKind(4) ? this.res.sum.total : 0);
+    }
+
+    GetSameKind(nb) {
+        let res = false;
         let tmpObj = {};
         for(let i = 0; i < this.dices.length; i++) {
             if(tmpObj[this.dices[i]]){
@@ -72,9 +64,13 @@ exports.yahtzee = class Yahtzee {
         }
 
         for(const [key, result] of Object.entries(tmpObj)){
-            if(result >= 4)
-            this.res["Four of kind"] = this.res.sum.total;
+            if(result >= nb) {
+                res = true
+                break;
+            }
         }
+
+        return res;
     }
 
     GetSmallStraight() {
@@ -134,20 +130,7 @@ exports.yahtzee = class Yahtzee {
     }
 
     GetYAHTZEE() {
-        let tmpObj = {};
-        for(let i = 0; i < this.dices.length; i++) {
-            if(tmpObj[this.dices[i]]){
-                tmpObj[this.dices[i]]++;
-            }
-            else{
-                tmpObj[this.dices[i]] = 1;
-            }
-        }
-
-        for(const [key, result] of Object.entries(tmpObj)){
-            if(result >= 5)
-                this.res["YAHTZEE"] = 50;
-        }
+        this.res["YAHTZEE"] = (this.GetSameKind(5) ? 50 : 0);
     }
 }
 
