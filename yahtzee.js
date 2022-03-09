@@ -33,6 +33,7 @@ exports.yahtzee = class Yahtzee {
         this.GetSmallStraight();
         this.GetLargeStraight();
         this.GetChance();
+        this.GetYAHTZEE();
     }
 
     GetSum() {
@@ -102,6 +103,23 @@ exports.yahtzee = class Yahtzee {
 
     GetChance() {
         this.res["Chance"] = this.res.sum.total;
+    }
+
+    GetYAHTZEE() {
+        let tmpObj = {};
+        for(let i = 0; i < this.dices.length; i++) {
+            if(tmpObj[this.dices[i]]){
+                tmpObj[this.dices[i]]++;
+            }
+            else{
+                tmpObj[this.dices[i]] = 1;
+            }
+        }
+
+        for(const [key, result] of Object.entries(tmpObj)){
+            if(result >= 5)
+                this.res["YAHTZEE"] = 50;
+        }
     }
 }
 
