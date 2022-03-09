@@ -31,7 +31,7 @@ exports.yahtzee = class Yahtzee {
         this.GetFourKind();
 
         this.GetSmallStraight();
-
+        this.GetLargeStraight();
         this.GetChance();
     }
 
@@ -79,11 +79,22 @@ exports.yahtzee = class Yahtzee {
     GetSmallStraight() {
         let begin = 0;
 
-        for(let i = 1; i < 6; i++) {
-            if(this.res.sum[i] > 1) {
+        for(let i = 1; i <= 6; i++) {
+            if(this.res.sum[i] > 0) {
                 begin++;
                 if(begin == 4) this.res["Small straight"] = 30;
-                // if(begin == 4) this.res["Large straight"] = 40;
+            }
+            else begin = 0;
+        }
+    }
+
+    GetLargeStraight() {
+        let begin = 0;
+
+        for(let i = 1; i <= 6; i++) {
+            if(this.res.sum[i] > 0) {
+                begin++;
+                if(begin == 5) this.res["Large straight"] = 40;
             }
             else begin = 0;
         }
