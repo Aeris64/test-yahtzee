@@ -1,4 +1,4 @@
-class Yahtzee {
+exports.yahtzee = class Yahtzee {
     dices = [];
     res = {
         sum: {
@@ -24,6 +24,8 @@ class Yahtzee {
     }
 
     Process() {
+        if(this.dices == null || this.dices.length != 5) return;
+
         this.GetSum();
     }
 
