@@ -29,6 +29,10 @@ exports.yahtzee = class Yahtzee {
         this.GetSum();
         this.GetThreeKind();
         this.GetFourKind();
+
+
+        
+        this.GetChance();
     }
 
     GetSum() {
@@ -43,7 +47,7 @@ exports.yahtzee = class Yahtzee {
         for(let i = 0; i < this.dices.length; i++) {
             if(tempArray[this.dices[i]]){
                 tempArray[this.dices[i]]++;
-            }    
+            }
             else{
                 tempArray[this.dices[i]] = 1;
             }
@@ -59,7 +63,7 @@ exports.yahtzee = class Yahtzee {
         for(let i = 0; i < this.dices.length; i++) {
             if(tempArray[this.dices[i]]){
                 tempArray[this.dices[i]]++;
-            }    
+            }
             else{
                 tempArray[this.dices[i]] = 1;
             }
@@ -68,7 +72,11 @@ exports.yahtzee = class Yahtzee {
             if(result >= 4)
             this.res["Four of kind"] = this.res.sum.total;
         }
-    }    
+    }
+
+    GetChance() {
+        this.res["Chance"] = this.res.sum.total;
+    }
 }
 
 exports.run = function run(...lst) {
