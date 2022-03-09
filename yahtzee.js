@@ -78,27 +78,29 @@ exports.yahtzee = class Yahtzee {
     }
 
     GetSmallStraight() {
-        let begin = 0;
-
-        for(let i = 1; i <= 6; i++) {
-            if(this.res.sum[i] > 0) {
-                begin++;
-                if(begin == 4) this.res["Small straight"] = 30;
-            }
-            else begin = 0;
-        }
+        this.res["Small straight"] = (this.GetStraight(4) ? 30 : 0);
     }
 
     GetLargeStraight() {
+        this.res["Large straight"] = (this.GetStraight(5) ? 40 : 0);
+    }
+
+    GetStraight(nb) {
+        let res = false;
         let begin = 0;
 
         for(let i = 1; i <= 6; i++) {
             if(this.res.sum[i] > 0) {
                 begin++;
-                if(begin == 5) this.res["Large straight"] = 40;
+                if(begin == nb) {
+                    res = true;
+                    break;
+                }
             }
             else begin = 0;
         }
+
+        return res
     }
 
     GetFullHouse() {
